@@ -1,17 +1,79 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import axios from 'axios';
+import Dashboard from './components/dashboard';
+import ListSurah from './components/listsurah';
+import DetaiSurah from './components/detailsurah';
+import DetailSurah from './components/detailsurah';
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element : <Dashboard />,
+    errorElement : <></>,
+    children : [
+      {
+        element : <ListSurah />,
+        path : "/",
+        loader : async ({req,params}) => {
+          try {
+            const url = `${process.env.REACT_APP_API_URL}`
+            const result = await axios.get(url)
+            return result;
+          
+          } catch (error) {
+            console.log(error)
+          }
+        },
+        index: true
+      },
+      {
+        path: "/:nomorsurah/ayahs",
+        element : <DetailSurah/>,
+        loader : async ({req,params}) => {
+          try {
+            const url = `${process.env.REACT_APP_API_URL}/${params.nomorsurah}`
+            const result = await axios.get(url)
+            return result
+          } catch (error){
+            console.log(error)
+          }
+        }
+      },
+      // {
+      //   path : "/:nomorsurah/ayahs",
+      //   element : <></>,
+      //   loader : async ({req,params}) => {
+      //     try {
+      //       const url = `${process.env.REACT_APP_API_URL}/${params}/ayahs`
+      //       const result = await axios.get(url)
+      //       return result
+      //     } catch (error) {
+      //       console.log(error)
+      //     }
+      //   }
+      // },
+      {
+        path : "/:nomorsurah/ayahs/:nomorayahs",
+        element : <></>,
+        loader : async ({req,params}) => {
+          try {
+            const url = `${process.env.REACT_APP_API_URL}/${params.nomorsurah}/ayahs/${params.nomorayahs}`
+            const result = await axios.get(url)
+            return result
+          } catch (error) {
+            console.log(error)
+          }
+        }
+      }
+    ]
+  }
+])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} /> 
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
