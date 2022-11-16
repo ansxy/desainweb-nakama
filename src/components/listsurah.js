@@ -1,12 +1,12 @@
 import { Link, useLoaderData } from "react-router-dom"
 import { motion } from "framer-motion"
+import sampul from "../image/sampul.png"
 export default function ListSurah(){
     const state  = useLoaderData();
     const handleClick = (e,i) => {
         e.preventDefault();
         console.log(i+1)
     }
-    console.log(state)
     return (
         <>
             <section>
@@ -14,6 +14,7 @@ export default function ListSurah(){
                     <div className="hero-overlay bg-green-600/50"></div>
                         <div className="hero-content text-center text-neutral-content">
                             <div className="max-w-md">
+                            <img alt="sampul" src={sampul}/>
                             <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
                             <p className="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                             <button className="btn btn-primary">Get Started</button>
