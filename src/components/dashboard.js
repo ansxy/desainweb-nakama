@@ -12,7 +12,7 @@ export default function Dashboard(){
             <div className="basis-auto bg-black">
                 <Outlet />
             </div>
-            <footer className="mt-auto bg-[#0066FF] flex justify-center text-white font-semibold">
+            <footer className="mt-auto bg-[#406C3C] text-white">
                 <Footer/>
             </footer>
         </>
