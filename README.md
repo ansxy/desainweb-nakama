@@ -1,3 +1,5 @@
-# Collage Project Desain Web Holy Quran Nakam
+# Collage Project Desain Web : Al-Quran Nakama
 
-This project create for final project Desain Web 
+This project created for final project for course Desain Web 
+
+Created with love <3 
