@@ -37,7 +37,7 @@ export default function DetailSurah() {
   //   e.preventDefault();
   // };
   return (
-    <div className="flex justify-center bg-slate-900">
+    <div className="flex justify-center bg-gradient-to-r from-[#141E30] to-[#243B55]">
       <section className="flex flex-col w-4/5">
         {!state ? (
           <></>
@@ -72,7 +72,7 @@ export default function DetailSurah() {
                         htmlFor={data.number.inSurah}
                         className="modal cursor-pointer"
                       >
-                        <label className="modal-box relative" htmlFor="">
+                        <div className="modal-box relative scrollbar-hide" htmlFor="">
                           <h3 className=" py-4 text-lg font-bold">Tafsir</h3>
                           <div>
                             <h3 className="text-md font-bold"> Jalalayn </h3>
@@ -86,7 +86,7 @@ export default function DetailSurah() {
                             <h3 className="text-md font-bold"> Quraish </h3>
                             <p className="">{data.tafsir["quraish"]}</p>
                           </div>
-                        </label>
+                        </div>
                       </label>
                     </div>
                   </div>

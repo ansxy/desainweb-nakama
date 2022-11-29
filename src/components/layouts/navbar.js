@@ -16,7 +16,7 @@ export default function Navbar() {
     });
 
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-gradient-to-r from-[#232526] to-[#414345]">
             <div className="flex-1">
                 <a href="/" className="btn btn-ghost normal-case text-xl">
                     AlQuran Nakama
@@ -30,6 +30,7 @@ export default function Navbar() {
                             backgroundColor : 'white',
                             width : "350px",
                             borderColor: state.isFocused ? "grey" : "blue",
+                            cursor : "text"
                         }),
                     }}
                     isSearchable
