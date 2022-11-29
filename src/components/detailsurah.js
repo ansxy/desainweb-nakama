@@ -1,24 +1,41 @@
 import { useEffect, useRef, useState } from "react";
 import { useLoaderData, useLocation } from "react-router-dom";
-import {AiOutlineBook} from "react-icons/ai" 
+import { BsFillPlayFill, BsStopFill } from "react-icons/bs";
+import { AiOutlineBook } from "react-icons/ai";
+import { IconContext } from "react-icons";
 export default function DetailSurah() {
   const state = useLoaderData();
-  const [prevaudio, setprevAudio] = useState("");
-  const [play, stop] = useState(false);
-  const audioRef = useRef(new Audio(prevaudio));
-  const handleAudio = (e, temp) => {
-    
-    const audio = new Audio(audioRef.current.value)
-    audio.pause()
-    audio.currentTime = 0
-    audio.play()
+
+  // useEffect(() => {
+  //     setPlay(state);
+  // }, [state]);
+
+  const handlePlay = (index) => {
+    state.map((arr, i) => {
+      if (i === index) {
+        arr.alafasy.play();
+        return { ...arr, play: true };
+      }
+      arr.alafasy.pause();
+      return { ...arr, play: false };
+    });
   };
 
-  const tafsirModal = (e) => {
-    e.preventDefault();
-  };
+  // const handlePause = (index) => {
+  //   setAudio((arr) =>
+  //     arr.map((sound, i) => {
+  //       if (i === index) {
+  //         sound.audio.pause();
+  //         return { ...sound, play: false };
+  //       }
+  //       return { ...sound, play: false };
+  //     })
+  //   );
+  // };
 
-  console.log(state);
+  // const tafsirModal = (e) => {
+  //   e.preventDefault();
+  // };
   return (
     <div className="flex justify-center bg-slate-900">
       <section className="flex flex-col w-4/5">
@@ -26,7 +43,7 @@ export default function DetailSurah() {
           <></>
         ) : (
           <>
-            {state.data.ayahs.map((data, i) => {
+            {state.map((data, i) => {
               return (
                 <div className="p-10 flex flex-col" key={i}>
                   <div
@@ -38,8 +55,11 @@ export default function DetailSurah() {
                     </div>
                     <div className="collapse-content">
                       {/* The button to open modal */}
-                      <label htmlFor={data.number.inSurah} className="flex flex-row place-items-center">
-                        <AiOutlineBook/>
+                      <label
+                        htmlFor={data.number.inSurah}
+                        className="flex flex-row place-items-center"
+                      >
+                        <AiOutlineBook />
                         <span>Tafsir</span>
                       </label>
                       {/* Put this part before </body> tag */}
@@ -60,7 +80,7 @@ export default function DetailSurah() {
                           </div>
                           <div>
                             <h3 className="text-md font-bold"> Kemenag </h3>
-                            <p className="">{data.tafsir["kemenag"].short   }</p>
+                            <p className="">{data.tafsir["kemenag"].short}</p>
                           </div>
                           <div>
                             <h3 className="text-md font-bold"> Quraish </h3>
@@ -70,16 +90,48 @@ export default function DetailSurah() {
                       </label>
                     </div>
                   </div>
-                  <button
-                    ref={audioRef}
-                    key={i}
-                    id={i}
-                    className="flex justify-start ml-5 mb-5"
-                    value={data.audio.alafasy}
-                    onClick={(e) => handleAudio(e, data.audio.alafasy)}
-                  >
-                    {play ? <> Playing </> : <>stop</>}
-                  </button>
+                  {data.play ? (
+                    <>
+                      <button
+                        name="play"
+                        className="flex justify-start ml-5 mb-5"
+                        onClick={() => handlePlay(i)}
+                      >
+                        <IconContext.Provider
+                          value={{
+                            color: "white",
+                            size: "50px",
+                            className: "global-class-name",
+                          }}
+                        >
+                          <>
+                            <BsFillPlayFill />
+                          </>
+                        </IconContext.Provider>
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        name="stop"
+                        className="flex justify-start ml-5 mb-5"
+                        onClick={() => handlePlay(i)}
+                      >
+                        <IconContext.Provider
+                          value={{
+                            color: "white",
+                            size: "50px",
+                            className: "global-class-name",
+                          }}
+                        >
+                          <>
+                            <BsStopFill />
+                          </>
+                        </IconContext.Provider>
+                      </button>
+                    </>
+                  )}
+
                   <p className="text-right text-2xl font-bold">
                     <span className="border-4 rounded-full p-1 mr-2">
                       {data.number.inSurah}
