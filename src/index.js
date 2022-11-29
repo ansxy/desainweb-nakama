@@ -35,7 +35,11 @@ const router = createBrowserRouter([
           try {
             const url = `${process.env.REACT_APP_API_URL}/${params.nomorsurah}`
             const result = await axios.get(url)
-            return result
+            const newResult = result.data.ayahs.map((data) => ({
+
+              ...data,"alafasy" : new Audio(data.audio.alafasy) ,  "play" : false
+            }))
+            return newResult
           } catch (error){
             console.log(error)
           }
