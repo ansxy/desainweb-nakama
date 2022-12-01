@@ -5,7 +5,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import axios from 'axios';
 import Dashboard from './components/dashboard';
 import ListSurah from './components/listsurah';
-import DetaiSurah from './components/detailsurah';
 import DetailSurah from './components/detailsurah';
 const router = createBrowserRouter([
   {

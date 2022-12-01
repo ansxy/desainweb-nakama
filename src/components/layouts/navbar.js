@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import LoadSurah from "../../lib/loadsurah";
 
 export default function Navbar() {
-    const [filter, setFilter] = useState();
     const [data, setData] = useState();
     const navigate = useNavigate();
     useEffect(() => {
@@ -19,7 +18,7 @@ export default function Navbar() {
         <div className="navbar bg-gradient-to-r from-[#232526] to-[#414345]">
             <div className="flex-1">
                 <a href="/" className="btn btn-ghost normal-case text-xl">
-                    AlQuran Nakama
+                    AL-QURAN NAKAMA
                 </a>
             </div>
             <div className="flex-none gap-2">
