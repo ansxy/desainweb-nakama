@@ -53,14 +53,15 @@ export default function ListSurah() {
 
                                         transition={{ type: "spring", stiffness: 400, damping: 20 }}
                                     >   
-                                        <Link to={`${i + 1}/ayahs`}>
-                                            <h1 className="text-black"> {e.number} </h1>
-                                            <div className="divider divider-horizontal"></div>
-                                            <div className="flex flex-col">
-                                                <h1 className="font-bold"> {e.name} </h1>
-                                                <p>{e.translation} </p>
-                                            </div>
-                                        </Link>
+                                            <Link to={`${i + 1}/ayahs`} className="flex flex-row text-black  hover:text-green-500">
+                                                <h1 className=""> {e.number} </h1>
+                                                <div className="divider divider-horizontal"></div>
+                                                <div className="flex flex-col">
+                                                    <h1 className="font-bold
+                                                    "> {e.name} </h1>
+                                                    <p className="">{e.translation} </p>
+                                                </div>
+                                            </Link>
                                         <button className="flex flex-grow flex-row-reverse" onClick={()=> handlePlay(i)}>
                                             <IconContext.Provider
                                                 value={{
