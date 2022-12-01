@@ -20,7 +20,10 @@ const router = createBrowserRouter([
           try {
             const url = `${process.env.REACT_APP_API_URL}`
             const result = await axios.get(url)
-            return result;
+            const newResult = result.data.map((data) => ({
+              ...data, "newAudio" : new Audio(data.audio) , "play" : false 
+            }))
+            return newResult;
           
           } catch (error) {
             console.log(error)
