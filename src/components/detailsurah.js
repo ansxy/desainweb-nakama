@@ -33,7 +33,7 @@ export default function DetailSurah() {
       <section className="flex justify-center  w-full">
         <button
           name="play"
-          className="flex justify-start mb-5"
+          className="flex justify-start mb-5" 
           onClick={() => handleFull()}
         >
           <IconContext.Provider
