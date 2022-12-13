@@ -5,9 +5,17 @@ import { AiOutlineBook } from "react-icons/ai";
 import { IconContext } from "react-icons";
 export default function DetailSurah() {
   const state = useLoaderData();
+  const [item,setItem] = useState();
+
+  useEffect(() => {
+    localStorage.setItem(window.location.href, JSON.stringify(item));
+  }, [item])
+  
+
   const handlePlay = (index) => {
     state.map((arr, i) => {
       if (i === index) {
+        setItem(i)
         arr.alafasy.play();
         return { ...arr, play: true };
       }
@@ -82,7 +90,6 @@ export default function DetailSurah() {
                       {data.meta.juz}:{data.number.inSurah}
                     </div>
                     <div className="collapse-content">
-                      {/* The button to open modal */}
                       <label
                         htmlFor={data.number.inSurah}
                         className="flex flex-row place-items-center"
@@ -90,7 +97,6 @@ export default function DetailSurah() {
                         <AiOutlineBook />
                         <span>Tafsir</span>
                       </label>
-                      {/* Put this part before </body> tag */}
                       <input
                         type="checkbox"
                         id={data.number.inSurah}
