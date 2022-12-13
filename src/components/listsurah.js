@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom"
+import { Link, useLoaderData, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 import sampul from "../image/sampul.png"
 import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
@@ -10,6 +10,14 @@ export default function ListSurah() {
     const handleClick = (e, i) => {
         e.preventDefault();
         console.log(i + 1)
+    }
+
+
+
+    const navigate = useNavigate();
+
+    const refreshPage = () => {
+        navigate(0);
     }
 
     const handlePlay = (index) =>{
@@ -53,7 +61,7 @@ export default function ListSurah() {
 
                                         transition={{ type: "spring", stiffness: 400, damping: 20 }}
                                     >   
-                                            <Link to={`${i + 1}/ayahs`} className="flex flex-row text-black  hover:text-green-500">
+                                            <Link to={`${i + 1}/ayahs`} onClick={refreshPage} className="flex flex-row text-black  hover:text-green-500">
                                                 <h1 className=""> {e.number} </h1>
                                                 <div className="divider divider-horizontal"></div>
                                                 <div className="flex flex-col">
