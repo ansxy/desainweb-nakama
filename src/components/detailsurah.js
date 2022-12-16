@@ -45,46 +45,9 @@ export default function DetailSurah() {
     });
   };
 
-  const handleFull = () => {};
 
   return (
     <div className="flex flex-col justify-center bg-gradient-to-r from-[#141E30] to-[#243B55]">
-      <section className="flex justify-center  w-full">
-        <button
-          name="play"
-          className="flex justify-start mb-5" 
-          onClick={() => handleFull()}
-        >
-          <IconContext.Provider
-            value={{
-              color: "white",
-              size: "50px",
-              className: "global-class-name",
-            }}
-          >
-            <>
-              <BsFillPlayFill />
-            </>
-          </IconContext.Provider>
-        </button>
-        <button
-          name="stop"
-          className="flex justify-start  mb-5"
-          onClick={() => handlePause()}
-        >
-          <IconContext.Provider
-            value={{
-              color: "white",
-              size: "50px",
-              className: "global-class-name",
-            }}
-          >
-            <>
-              <BsFillPauseFill />
-            </>
-          </IconContext.Provider>
-        </button>
-      </section>
       <section className="flex flex-col w-full justify-center place-items-center">
         {!state ? (
           <></>
@@ -192,7 +155,6 @@ export default function DetailSurah() {
           </>
         )}
       </section>
-      <section></section>
     </div>
   );
 }
