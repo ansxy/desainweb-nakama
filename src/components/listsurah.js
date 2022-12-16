@@ -1,23 +1,39 @@
-import { Link, useLoaderData, useNavigate } from "react-router-dom"
+import { Link, Navigate, useLoaderData, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 import sampul from "../image/sampul.png"
 import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
+import {GiPerspectiveDiceSixFacesRandom} from "react-icons/gi"
 import { IconContext } from "react-icons";
+import { useEffect, useState } from "react";
 
 
 export default function ListSurah() {
     const state = useLoaderData();
-    const handleClick = (e, i) => {
-        e.preventDefault();
-        console.log(i + 1)
-    }
-
-
-
+    const [item,setItem] = useState([]);
+    const getItem =  JSON.parse(localStorage.getItem('alreadyPlayed')|| '0')
     const navigate = useNavigate();
 
-    const refreshPage = () => {
-        navigate(0);
+    useEffect(() => {
+        if(getItem !==0 ){
+          setItem([...getItem])
+        }
+      }, [])
+
+    useEffect(() => {
+        localStorage.setItem('alreadyPlayed', JSON.stringify(item))
+      },[item])
+
+    const handleClick = (i) => {
+        if(item.includes(i)){
+            ;
+          }else{
+            setItem((prev) => ([...prev,i]) )
+          }
+    }
+
+    const randomHandler = (e) => {
+        const nomorSurahRandom =  Math.floor(Math.random() * (114 + 1) + 1)
+        navigate(`${nomorSurahRandom}/ayahs`)
     }
 
     const handlePlay = (index) =>{
@@ -61,13 +77,13 @@ export default function ListSurah() {
 
                                         transition={{ type: "spring", stiffness: 400, damping: 20 }}
                                     >   
-                                            <Link to={`${i + 1}/ayahs`} onClick={refreshPage} className="flex flex-row text-black  hover:text-green-500">
+                                            <Link onClick={() => handleClick(i)} replace={true} to={`${i + 1}/ayahs`} className="flex flex-row text-black  hover:text-green-500">
                                                 <h1 className=""> {e.number} </h1>
                                                 <div className="divider divider-horizontal"></div>
                                                 <div className="flex flex-col">
                                                     <h1 className="font-bold
                                                     "> {e.name} </h1>
-                                                    <p className="">{e.translation} </p>
+                                                    <p className="text-gray-400">{e.translation} </p>
                                                 </div>
                                             </Link>
                                         <button className="flex flex-grow flex-row-reverse" onClick={()=> handlePlay(i)}>
@@ -93,6 +109,10 @@ export default function ListSurah() {
                     </>
                 )}
             </section>
+            <button onClick={randomHandler} title="random"
+                className="fixed z-90 bottom-10 right-8 bg-zinc-800/50 w-20 h-20 rounded-full drop-shadow-lg flex justify-center items-center text-white text-4xl hover:bg-zinc-800">
+                        <GiPerspectiveDiceSixFacesRandom/>
+                </button>
         </>
     )
 }
