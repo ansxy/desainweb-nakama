@@ -1,7 +1,6 @@
-import Navbar from "./layouts/navbar";
+import Navbar from "../layouts/navbar";
 import { Outlet, useLocation} from "react-router-dom";
-
-import Footer from "./layouts/footer";
+import Footer from "../layouts/footer";
 
 
 export default function Dashboard(){
