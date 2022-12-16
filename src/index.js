@@ -40,7 +40,6 @@ const router = createBrowserRouter([
             const newResult = result.data.ayahs.map((data) => ({
               ...data,"alafasy" : new Audio(data.audio.alafasy) ,  "play" : false , "fullAudio" : new Audio(result.audio)
             }))
-            console.log(newResult)
             return newResult
           } catch (error){
             console.log(error)
