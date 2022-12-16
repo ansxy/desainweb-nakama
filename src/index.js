@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import axios from 'axios';
-import Dashboard from './components/dashboard';
-import ListSurah from './components/listsurah';
-import DetailSurah from './components/detailsurah';
+import Dashboard from './pages/dashboard';
+import ListSurah from './pages/listsurah';
+import DetailSurah from './pages/detailsurah';
+
 const router = createBrowserRouter([
   {
     path: "/",

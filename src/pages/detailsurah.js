@@ -1,29 +1,30 @@
 import { useEffect, useRef, useState } from "react";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
-import { AiOutlineBook } from "react-icons/ai";
 import { IconContext } from "react-icons";
+import ModalTafsir from "../components/modaltafsir";
+import Audio from "../components/audio";
 export default function DetailSurah() {
   const state = useLoaderData();
-  const [item,setItem] = useState([]);
-  const getItem =  JSON.parse(localStorage.getItem(window.location.href)|| '0')
+  const [item, setItem] = useState([]);
+  const getItem = JSON.parse(localStorage.getItem(window.location.href) || '0')
 
 
   useEffect(() => {
-    if(getItem !==0 ){
+    if (getItem !== 0) {
       setItem([...getItem])
     }
   }, [])
 
   useEffect(() => {
     localStorage.setItem(window.location.href, JSON.stringify(item))
-  },[item])
-  
+  }, [item])
+
   const handlePlay = (index) => {
-    if(item.includes(index)){
+    if (item.includes(index)) {
       ;
-    }else{
-      setItem((prev) => ([...prev,index]) )
+    } else {
+      setItem((prev) => ([...prev, index]))
     }
     state.map((arr, i) => {
       if (i === index) {
@@ -56,54 +57,7 @@ export default function DetailSurah() {
             {state.map((data, i) => {
               return (
                 <div className="p-10 flex flex-col w-4/5" key={i}>
-                  <div
-                    tabIndex={0}
-                    className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box w-28 mb-5"
-                  >
-                    <div className="collapse-title text-xl font-medium">
-                      {data.meta.juz}:{data.number.inSurah}
-                    </div>
-                    <div className="collapse-content">
-                      <label
-                        htmlFor={data.number.inSurah}
-                        className="flex flex-row place-items-center"
-                      >
-                        <AiOutlineBook />
-                        <span>Tafsir</span>
-                      </label>
-                      <input
-                        type="checkbox"
-                        id={data.number.inSurah}
-                        className="modal-toggle"
-                      />
-                      <label
-                        htmlFor={data.number.inSurah}
-                        className="modal cursor-pointer"
-                      >
-                        <div
-                          className="modal-box relative scrollbar-hide"
-                          htmlFor=""
-                        >
-                          <h3 className=" py-4 text-3xl font-bold">Tafsir</h3>
-                          <div>
-                            <h3 className="text-xl font-bold m-3">
-                              {" "}
-                              Jalalayn{" "}
-                            </h3>
-                            <p className="">{data.tafsir["jalalayn"]}</p>
-                          </div>
-                          <div>
-                            <h3 className="text-xl font-bold m-3"> Kemenag </h3>
-                            <p className="">{data.tafsir["kemenag"].short}</p>
-                          </div>
-                          <div>
-                            <h3 className="text-xl font-bold m-3"> Quraish </h3>
-                            <p className="">{data.tafsir["quraish"]}</p>
-                          </div>
-                        </div>
-                      </label>
-                    </div>
-                  </div>
+                  <ModalTafsir data={data} />
                   <div className="flex felx-col max-w-content">
                     <button
                       name="play"
@@ -141,8 +95,9 @@ export default function DetailSurah() {
                       </IconContext.Provider>
                     </button>
                   </div>
-                  <p className="text-right text-2xl font-bold" style={{color : item.includes(i) ? 'green' : "white"
-                }}>
+                  <p className="text-right text-2xl font-bold" style={{
+                    color: item.includes(i) ? 'green' : "white"
+                  }}>
                     <span className="border-4 rounded-full p-1 mr-2">
                       {data.number.inSurah}
                     </span>
